@@ -20,7 +20,7 @@ const PORT = 4000;
 
 zomato.listen(PORT, () => {
     ConnectDB().then(() => {
-        console.log("Server is running !!!");
+        console.log("Server is running..!!!");
     }).catch((e) => {
         console.log("Server is running, but database connection failed...!");
         console.log(e);
