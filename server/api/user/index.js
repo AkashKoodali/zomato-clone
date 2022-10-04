@@ -38,6 +38,8 @@ Router.get("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
+    await validateId(req.params);
+
     const getUser = await UserModel.findById(_id);
 
     if (!getUser) return res.status(404).json({ error: "User not found" });
@@ -64,6 +66,8 @@ Router.put(
   async (req, res) => {
     try {
       const { _id } = req.params;
+
+      await validateId(req.params);
 
       const { userData } = req.body;
 
