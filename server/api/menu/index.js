@@ -15,6 +15,8 @@ Router.get("/list/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
+    await validateId(req.params);
+
     const menu = await MenuModel.findById(_id);
 
     if (!menu) {
@@ -40,11 +42,16 @@ Router.get("/list/:_id", async (req, res) => {
 Router.get("/image/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
+
+    await validateId(req.params);
+
     const menuImage = await ImageModel.findById(_id);
+
     if (!menuImage)
       return res.status(404).json({
         error: "No images found",
       });
+      
     return res.json({ menuImage });
   } catch (error) {
     res.status(500).json({ error: error.message });
