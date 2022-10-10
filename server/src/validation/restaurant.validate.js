@@ -7,7 +7,7 @@ export const ValidateRestaurantCity = (restaurantObject) => {
 
     });
 
-    return Schema.valrestaurantObjectateAsync(restaurantObject);
+    return Schema.validateAsync(restaurantObject);
 };
 
 
@@ -17,6 +17,6 @@ export const ValidateSearchString = (restaurantObject) => {
 
     });
 
-    return Schema.valrestaurantObjectateAsync(restaurantObject);
+    return Schema.validateAsync(restaurantObject);
 };
 

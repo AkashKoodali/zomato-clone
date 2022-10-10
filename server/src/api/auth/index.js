@@ -1,9 +1,12 @@
 import express from "express";
+import passport from "passport";
 import { UserModel } from "../../database/allModels";
-import { ValidateSignin, ValidateSignup } from "../../validation/auth.validation";
+import {
+  ValidateSignin,
+  ValidateSignup,
+} from "../../validation/auth.validation";
 
 const Router = express.Router();
-
 
 /**
  * Route - /signup
@@ -16,7 +19,7 @@ const Router = express.Router();
 Router.post("/signup", async (req, res) => {
   try {
     await ValidateSignup(req.body.credentials);
-    
+
     await UserModel.findByEmailAndPhone(req.body.credentials);
 
     const newUser = await UserModel.create(req.body.credentials);
@@ -28,8 +31,6 @@ Router.post("/signup", async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-
-
 
 /**
  * Route - /signin
@@ -48,11 +49,41 @@ Router.post("/signin", async (req, res) => {
     const token = user.generateJwtToken();
 
     return res.status(200).json({ token, status: "success" });
-    
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 });
 
+/**
+ * Route - /google
+ * Des -  Google
+ * Params -  none
+ * Access -  public
+ * Method - get
+ */
+
+Router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ],
+  })
+);
+
+Router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    // return res.status(200).json({
+    //   token: req.session.passport.user.token,
+    // });
+
+    return res.redirect(
+      `http://localhost:3000/google/${req.session.passport.user.token}`
+    );
+  }
+);
 
 export default Router;
