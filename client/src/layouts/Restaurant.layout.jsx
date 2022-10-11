@@ -17,7 +17,7 @@ const RestaurantLayout =
   ({ ...props }) => {
     return (
       <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Component {...props}/>
        
       </>
