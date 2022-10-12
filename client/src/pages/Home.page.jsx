@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='my-5'>
+      <div className='my-5 mb-20'>
       {type === 'delivery' && <Delivery/>}
       {type === 'night' && <NightLife/>}
       {type === 'dining' && <Dining/>}
