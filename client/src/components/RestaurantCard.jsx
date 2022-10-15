@@ -4,7 +4,7 @@ import { AiTwotoneStar } from "react-icons/ai";
 
 const RestaurantCard = (props) => {
 
-    const [image, setImage] = useState({
+    const [image] = useState({
         images: [
           {
             location:
