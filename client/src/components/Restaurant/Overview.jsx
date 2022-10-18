@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
-import ReactStars from "react-rating-stars-component";
+//import ReactStars from "react-rating-stars-component";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
@@ -13,7 +13,9 @@ import MenuSimilarRestaurantCard from "./MenuSimilarRestaurantCard";
 import ReviewCard from "../Reviews/ReviewCard";
 import MapView from "./MapView";
 
+
 const Overview = () => {
+
   const [restaurant] = useState({
     _id: "124ksjf435245jv34fg3",
     isPro: true,
@@ -32,14 +34,28 @@ const Overview = () => {
     averageCost: "450",
   });
 
-  const [menuImages, setMenuImages] = useState([
+  const [menuImages] = useState([
     "https://b.zmtcdn.com/data/menus/931/931/d40e86a957d1ed6e6fabe5a67a161904.jpg",
     "https://b.zmtcdn.com/data/menus/931/931/36f8a3b9e5dbf6435f903c9a8745bcc8.jpg",
     "https://b.zmtcdn.com/data/menus/931/931/8d6623791860b054953b6c2c14d61bcb.jpg",
     "https://b.zmtcdn.com/data/menus/931/931/6d462a04051c0eabb0067149aa84cc64.jpg",
-  ]);
+  ])
 
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([
+    {
+      rating: 3.5,
+      isRestaurantReview: false,
+      createdAt: "Fri Oct 14 2022 20:20:34 GMT+0530 (India Standard Time)",
+      reviewText: "Very bad experience.",
+    },
+    {
+      rating: 4.5,
+      isRestaurantReview: false,
+      createdAt: "Fri Oct 14 2022 20:19:34 GMT+0530 (India Standard Time)",
+      reviewText: "Very good experience.",
+    },
+  ]);
+  
   const { id } = useParams();
 
   const slideConfig = {
@@ -111,13 +127,13 @@ const Overview = () => {
 
         <div className="flex flex-col-reverse">
           <div className="my-4">
-            <h4>Rate your delivery experience</h4>
-            <ReactStars
+            <h4>{restaurant.name} Reviews</h4>
+            {/* <ReactStars
               count={5}
               onChange={(newRating) => console.log(newRating)}
               size={24}
               activeColor="#ffd700"
-            />
+            /> */}
             {reviews.map((review, index) => (
               <ReviewCard {...review} key={index} />
             ))}
@@ -167,6 +183,7 @@ const Overview = () => {
           title="McDonal's"
           phno="+913458585858"
           mapLocation={getLatLong("28.64121406271755, 77.21955482132051")}
+          latAndLong= {"28.64121406271755, 77.21955482132051"}
           address="H-5/6 Plaza Building, Connaught Place, New Delhi"
         />
       </aside>

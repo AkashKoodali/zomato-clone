@@ -8,7 +8,7 @@ const MobileNavbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const user = {
-    //fullName: "akash",
+    fullName: "akash",
   };
 
   return (
@@ -69,7 +69,7 @@ const LargeNav = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const user = {
-    //fullName: "akash",
+    fullName: "akash",
   };
 
   return (
