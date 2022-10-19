@@ -26,19 +26,19 @@ const AddReviewCard = () => {
       <div className="flex items-left gap-3">
         <div className="flex items-center gap-2">
           <input
-            type={"radio"}
+            type="radio"
             name="review"
             id="dining"
-            onChange={(each) => getReviewType(each.target.name)}
+            onChange={(each) => getReviewType(each.target.id)}
           />
           <label htmlFor="dining">Dining</label>
         </div>
         <div className="flex items-center gap-2">
           <input
-            type={"radio"}
+            type="radio"
             name="review"
             id="delivery"
-            onChange={(each) => getReviewType(each.target.name)}
+            onChange={(each) => getReviewType(each.target.id)}
           />
           <label htmlFor="delivery">Delivery</label>
         </div>
