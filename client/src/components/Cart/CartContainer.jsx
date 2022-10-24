@@ -61,7 +61,7 @@ const CartData = ({ toggle }) => {
 const CartContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [cart, setCart] = useState([
+  const [cart] = useState([
     {
       image:
         "https://b.zmtcdn.com/data/dish_photos/af1/fd1b012ebfbe82f2e5212b702ce19af1.jpg",
