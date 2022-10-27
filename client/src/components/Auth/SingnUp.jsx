@@ -1,13 +1,17 @@
-import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-const SignUP = ({ isOpen, setIsOpen }) => {
+// redux
+import { useDispatch } from "react-redux";
+import { signUp } from "../../redux/reducers/auth/auth.action";
+import { getMySelf } from "../../redux/reducers/user/user.action";
+
+const Signup = ({ isOpen, setIsOpen }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    fullName:""
+    fullName: "",
   });
 
   const handleChange = (e) => {
@@ -18,17 +22,17 @@ const SignUP = ({ isOpen, setIsOpen }) => {
     setIsOpen(false);
   };
 
-  const submit = () => {
+  const dispatch = useDispatch();
+
+  const submit = async () => {
+    await dispatch(signUp(userData));
+    await dispatch(getMySelf());
     closeModal();
-    setUserData({
-      email: "",
-      password: "",
-      fullName: "",
-    });
+    setUserData({ email: "", password: "", fullName: "" });
   };
 
   const googleSignUp = () =>
-    (window.location.href = "https://localhost:4000/auth/google");
+    (window.location.href = "http://localhost:4000/auth/google");
 
   return (
     <>
@@ -63,53 +67,55 @@ const SignUP = ({ isOpen, setIsOpen }) => {
                     className="text-lg font-medium leading-6 text-gray-900"
                   ></Dialog.Title>
                   <div className="mt-2 flex flex-col gap-3 w-full">
-                  <button
-                    className="py-2 justify-center rounded-lg flex w-full items-center gap-2 
-                  border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
-                    onClick={googleSignUp}
-                  >
-                    Sign Up With Google <FcGoogle />
-                  </button>
+                    <button
+                      className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
+                      onClick={googleSignUp}
+                    >
+                      Sign Up With Google <FcGoogle />
+                    </button>
 
-                  <form action="" className="flex flex-col gap-2">
-                  <div className="w-full flex flex-col gap-2">
-                      <label htmlFor="fullName">Full Name</label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        value={userData.fullName}
-                        onChange={handleChange}
-                        placeholder="John Doe"
-                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
-                      />
-                    </div>
-                    <div className="w-full flex flex-col gap-2">
-                      <label htmlFor="email">Email</label>
-                      <input
-                        type="text"
-                        id="email"
-                        value={userData.email}
-                        onChange={handleChange}
-                        placeholder="user@gmail.com"
-                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
-                      />
-                    </div>
-                    <div className="w-full flex flex-col gap-2">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="password"
-                        id="password"
-                        value={userData.password}
-                        onChange={handleChange}
-                        placeholder="***********"
-                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
-                      />
-                    </div>
-                    <div className="w-full text-center bg-zomato-400 text-white px-2 py-2 cursor-pointer rounded-lg" 
-                    onClick={submit} type='submit'>
-                        Sign Up
-                    </div>
-                  </form>
+                    <form className="flex flex-col gap-2">
+                      <div className="w-full flex flex-col gap-2">
+                        <label htmlFor="fullName">Full Name</label>
+                        <input
+                          type="text"
+                          id="fullName"
+                          value={userData.fullName}
+                          onChange={handleChange}
+                          placeholder="John Doe"
+                          className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
+                          required
+                        />
+                      </div>
+                      <div className="w-full flex flex-col gap-2">
+                        <label htmlFor="email">Email</label>
+                        <input
+                          type="text"
+                          id="email"
+                          value={userData.email}
+                          onChange={handleChange}
+                          placeholder="user@email.com"
+                          className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
+                        />
+                      </div>
+                      <div className="w-full flex flex-col gap-2">
+                        <label htmlFor="email">Password</label>
+                        <input
+                          type="password"
+                          id="password"
+                          value={userData.password}
+                          onChange={handleChange}
+                          placeholder="*********"
+                          className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:border-zomato-400"
+                        />
+                      </div>
+                      <div
+                        className="w-full text-center bg-zomato-400 text-white px-2 rounded-lg py-2 cursor-pointer"
+                        onClick={submit}
+                      >
+                        Sign In
+                      </div>
+                    </form>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -121,4 +127,4 @@ const SignUP = ({ isOpen, setIsOpen }) => {
   );
 };
 
-export default SignUP;
+export default Signup;
