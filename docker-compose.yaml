@@ -1,0 +1,38 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    build: 
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3080:80"
+    depends_on:
+      - nodeserver
+      - client
+  nodeserver:
+    restart: always
+    build: 
+      dockerfile: Dockerfile
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - MONGO_URL=mongodb+srv://akash:AkAsh@cluster0.tmtbdxn.mongodb.net/?retryWrites=true&w=majority
+      - JWTSECRET=ZomatoApp
+      - AWS_S3_ACCESS_KEY=AKIA3VIBOSTDHXGX33GJ
+      - AWS_S3_SECRET_KEY=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
+      - GOOGLE_CLIENT_ID=160582990399-7q9pbaj8m0baekerj32bvnsjecll7gpg.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=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
+    ports:
+      - "4000:4000"
+  client:
+    build: 
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    ports:
+      - "3000:3000"
