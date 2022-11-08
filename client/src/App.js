@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 
 //pages
 import Checkout from "./pages/Checkout.page";
@@ -16,7 +17,21 @@ import Photos from "./components/Restaurant/Photos";
 import Restaurant from "./pages/Restaurant.page";
 import RestaurantLayout from "./layouts/Restaurant.layout";
 
+
+// redux
+import { useDispatch } from "react-redux";
+import { getMySelf } from "./redux/reducers/user/user.action";
+import { getCart } from "./redux/reducers/cart/cart.action";
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMySelf());
+    dispatch(getCart());
+  }, [localStorage]);
+
+  
   return (
     <>
       <Routes>

@@ -15,7 +15,7 @@ Router.get("/list/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
-    await validateId(req.params);
+    //await validateId(req.params);
 
     const menu = await MenuModel.findById(_id);
 
@@ -43,7 +43,7 @@ Router.get("/image/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
 
-    await validateId(req.params);
+    //await validateId(req.params);
 
     const menuImage = await ImageModel.findById(_id);
 
