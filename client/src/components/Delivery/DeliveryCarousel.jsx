@@ -84,7 +84,7 @@ const DeliveryCarousel = () => {
   };
 
   return <>
-  <h1 className="text-xl mt-4 mb-5 md:text-3xl md:font-semibold">
+  <h1 className="text-xl mt-16 mb-6 md:text-3xl md:font-semibold">
     Inspiration for your first order
   </h1>
   <div className="lg:hidden grid grid-cols-3 md:grid-cols-4 gap-3 justify-center">

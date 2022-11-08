@@ -1,22 +1,23 @@
 import React from "react";
 import classnames from "classnames";
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 const MenuCategory = (props) => {
-  const {id} = useParams()
+  const { id } = useParams();
+
   return (
     <>
-      <div
+      <a
         className={classnames("py-2 px-1", {
           "text-zomato-400 bg-zomato-50 border-r-4 border-zomato-400":
             props.isActive,
         })}
         onClick={props.onClickHandler}
+        href={`/restaurant/${id}/order-online/#${props.target}`}
+        id={props.name}
       >
-        <a href={`/restaurant/${id}/order-online/#${props.target}`} id={props.name} >
-          {props.name} ({props.items.length})
-        </a>
-      </div>
+        {props.name} ({props.items.length})
+      </a>
     </>
   );
 };

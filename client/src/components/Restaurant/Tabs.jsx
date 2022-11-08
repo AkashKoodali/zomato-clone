@@ -14,8 +14,9 @@ const Tab = (props) => {
       >
         <h3 className="text-lg md:text-xl">{props.title}</h3>
       </div>
-      <div className={classnames("w-full h-1 absolute -bottom-4", {
-          "bg-zomato-400": props.isActive,
+      <div
+        className={classnames("w-full h-1 absolute -bottom-4", {
+          " bg-zomato-400 ": props.isActive,
         })}
       />
     </Link>

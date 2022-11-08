@@ -36,7 +36,7 @@ Router.get("/:_id", async (req, res) => {
  * Method    POST
  */
 
-Router.post("/", upload.single("file"), async (req, res) => {
+Router.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const file = req.file;
 
@@ -73,33 +73,33 @@ Router.post("/", upload.single("file"), async (req, res) => {
  * Method    POST
  */
 
-//  Router.post("/", upload.array("file", 4), async (req, res) => {
-//     try {
-//       const files = req.files;
+ Router.post("/uploads", upload.array("files", 4), async (req, res) => {
+    try {
+      const files = req.files;
   
-//       const bucketOptions = {
-//         Bucket: "zomato-clone-1",
-//         Key: files.originalname,
-//         Body: files.buffer,
-//         ContentType: files.mimetype,
-//         ACL: "public-read", // Access Control List
-//       };
+      const bucketOptions = {
+        Bucket: "zomato-clone-1",
+        Key: files.originalname,
+        Body: files.buffer,
+        ContentType: files.mimetype,
+        ACL: "public-read", // Access Control List
+      };
   
-//       const uploadImage = await s3Upload(bucketOptions);
+       const uploadImage = await s3Upload(bucketOptions);
   
-//     //   const dbUpload = await ImageModel.create({
-//     //     images: [
-//     //       {
-//     //         location: uploadImage.Location,
-//     //       },
-//     //     ],
-//     //   });
+      const dbUpload = await ImageModel.create({
+        images: [
+          {
+            location: uploadImage.Location,
+          },
+        ],
+      });
   
-//       return res.status(200).json({ uploadImage });
-//     } catch (error) {
-//       return res.status(500).json({ error: error.message });
-//     }
-//   });
+      return res.status(200).json({ dbUpload });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  });
   
 
 export default Router;

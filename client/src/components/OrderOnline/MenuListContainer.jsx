@@ -1,6 +1,6 @@
 import React from "react";
 
-//components
+// components
 import MenuCategory from "./MenuCategory";
 
 const MenuListContainer = (props) => {
@@ -11,9 +11,8 @@ const MenuListContainer = (props) => {
           name={props.name}
           items={props.items}
           onClickHandler={props.onClickHandler}
-          selected={props.selected}
           isActive={props.selected === props.name}
-          index={props.target}
+          target={props.target}
         />
       </div>
     </>
